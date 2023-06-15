@@ -1,0 +1,9 @@
+- Shift (hold): run
+- Space: jump/double jump
+- Left Click: shoot
+- Right Click: zoom in/out
+- WASD: player movement
+- Move Mouse: camera movement
+- Tab: switch weapons
+- Escape: pause/unpause
+- L: Reset level to default spawn point
