@@ -49,8 +49,23 @@ public class BulletController : MonoBehaviour
 
         if (other.gameObject.tag == "Player" && damagePlayer)
         {
+            int difficultyModifier = PlayerPrefs.GetInt("difficultyModifier");
+
+            int adjustedDamage = damage + difficultyModifier * 3;
+
+            if (adjustedDamage < 1) adjustedDamage = 1;
+            if (adjustedDamage > 999) adjustedDamage = 999;
+
             //Debug.Log("Hit Player at " + transform.position);
-            PlayerHealthController.instance.DamagePlayer(damage);
+            if (difficultyModifier > 0)
+            {
+                PlayerHealthController.instance.DamagePlayer(adjustedDamage);
+            }
+            else
+            {
+                PlayerHealthController.instance.DamagePlayer(damage);
+            }
+            
         }
 
         Destroy(gameObject);

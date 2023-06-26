@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b62cff3563242a4b94d3c8774fae9d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 10
   laserRedMaterial: {fileID: 2100000, guid: 6355457ba027f044fba5db1a1ab153ee, type: 2}
   brightOrangeMaterial: {fileID: 2100000, guid: 9b78cc4cd6782b848a776562bdf9603b, type: 2}
 --- !u!1 &54127167606831349

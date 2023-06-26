@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/SetDifficulty.unity
+    guid: e1788673309daa04a9091cdee7375621
+  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: d741a7bf531237948af061fe8aef4a6e
   - enabled: 1

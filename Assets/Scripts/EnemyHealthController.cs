@@ -9,6 +9,13 @@ public class EnemyHealthController : MonoBehaviour
 
     public EnemyController theEC;
 
+    public AdjustCriteria adjustCriteria;
+
+    private void Awake()
+    {
+        adjustCriteria = FindObjectOfType<AdjustCriteria>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +39,19 @@ public class EnemyHealthController : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            adjustCriteria.skillStreak += 1;
+            Debug.Log("Current skillStreak: " + adjustCriteria.skillStreak);
+
+            adjustCriteria.struggleStreak = 0;
+            Debug.Log("Enemy defeated, " + adjustCriteria.struggleStreak);
+
+            if (adjustCriteria.skillStreak == adjustCriteria.skillStreakThreshold)
+            {
+                adjustCriteria.AdjustDifficultyProficient();
+                adjustCriteria.skillStreak = 0;
+                Debug.Log("Reached threshold. Current skillStreak: " + adjustCriteria.skillStreak);
+            }
+
             Destroy(gameObject);
 
             AudioManager.instance.PlaySFX(2);

@@ -51,4 +51,13 @@ public class UIController : MonoBehaviour
     {
         damageEffect.color = new Color(damageEffect.color.r, damageEffect.color.g, damageEffect.color.b, .25f);
     }
+
+    public void UpdateAmmoText()
+    {
+        if (PlayerController.instance != null && PlayerController.instance.activeGun != null)
+        {
+            ammoText.text = "Ammo: " + PlayerController.instance.activeGun.currentAmmo;
+        }
+    }
+
 }

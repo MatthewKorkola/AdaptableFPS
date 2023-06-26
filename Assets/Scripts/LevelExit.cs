@@ -9,6 +9,13 @@ public class LevelExit : MonoBehaviour
 
     public float waitToEndLevel;
 
+    public AdjustCriteria adjustCriteria;
+
+    private void Awake()
+    {
+        adjustCriteria = FindObjectOfType<AdjustCriteria>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +45,9 @@ public class LevelExit : MonoBehaviour
         PlayerPrefs.SetString(nextLevel + "_cp", "");
 
         yield return new WaitForSeconds(waitToEndLevel);
+
+        // difficulty adjustment
+        adjustCriteria.AdjustDifficultyVictory();
 
         SceneManager.LoadScene(nextLevel);
     }

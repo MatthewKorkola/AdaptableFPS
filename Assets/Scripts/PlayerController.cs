@@ -49,15 +49,20 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+        currentGun--;
+        SwitchGun();
+
+        gunStartPos = gunHolder.localPosition;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        currentGun--;
-        SwitchGun();
+        //currentGun--;
+        //SwitchGun();
 
-        gunStartPos = gunHolder.localPosition;
+        //gunStartPos = gunHolder.localPosition;
     }
 
     // Update is called once per frame

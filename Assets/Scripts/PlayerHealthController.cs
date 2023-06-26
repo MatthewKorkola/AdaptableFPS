@@ -11,9 +11,12 @@ public class PlayerHealthController : MonoBehaviour
     public float invincibleLength = 1f;
     private float invincCounter;
 
+    public AdjustCriteria adjustCriteria;
+
     private void Awake()
     {
         instance = this;
+        adjustCriteria = FindObjectOfType<AdjustCriteria>();
     }
 
     // Start is called before the first frame update
@@ -43,6 +46,19 @@ public class PlayerHealthController : MonoBehaviour
             AudioManager.instance.PlaySFX(7);
 
             currentHealth -= damageAmount;
+
+            adjustCriteria.skillStreak = 0;
+            Debug.Log("Player hit. Current skillStreak: " + adjustCriteria.skillStreak);
+
+            adjustCriteria.struggleStreak += damageAmount;
+            Debug.Log("Total damage received since last enemy kill: " + adjustCriteria.struggleStreak);
+
+            if (adjustCriteria.struggleStreak >= adjustCriteria.struggleStreakThreshold)
+            {
+                adjustCriteria.AdjustDifficultyStruggling();
+                adjustCriteria.struggleStreak = 0;
+                Debug.Log("Damage threshold reached. New value: " + adjustCriteria.struggleStreak);
+            }
 
             UIController.instance.ShowDamage();
 

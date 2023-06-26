@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public AdjustCriteria adjustCriteria;
+
     public float waitAfterDying = 2f;
 
     [HideInInspector]
@@ -15,6 +17,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        adjustCriteria = FindObjectOfType<AdjustCriteria>();
     }
 
     // Start is called before the first frame update
@@ -45,6 +48,9 @@ public class GameManager : MonoBehaviour
     public IEnumerator PlayerDiedCo()
     {
         yield return new WaitForSeconds(waitAfterDying);
+
+        // difficulty adjustment
+        adjustCriteria.AdjustDifficultyDeath();
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
