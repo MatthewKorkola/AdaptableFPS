@@ -14,6 +14,11 @@ public class BulletController : MonoBehaviour
 
     public bool damageEnemy, damagePlayer;
 
+    private void Awake()
+    {
+        
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,10 +40,20 @@ public class BulletController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Enemy" && damageEnemy)
+        int difficultyModifier = PlayerPrefs.GetInt("difficultyModifier");
+
+        if (other.gameObject.tag == "Enemy" && damageEnemy)
         {
             //Destroy(other.gameObject);
-            other.gameObject.GetComponent<EnemyHealthController>().DamageEnemy(damage);
+            if (difficultyModifier < 0)
+            {
+                other.gameObject.GetComponent<EnemyHealthController>().DamageEnemy((int)(damage * 1.5));
+            }
+            else
+            {
+                other.gameObject.GetComponent<EnemyHealthController>().DamageEnemy(damage);
+            }
+            
         }
 
         if (other.gameObject.tag == "Headshot" && damageEnemy)
@@ -49,7 +64,6 @@ public class BulletController : MonoBehaviour
 
         if (other.gameObject.tag == "Player" && damagePlayer)
         {
-            int difficultyModifier = PlayerPrefs.GetInt("difficultyModifier");
 
             int adjustedDamage = damage + difficultyModifier * 3;
 
@@ -60,6 +74,10 @@ public class BulletController : MonoBehaviour
             if (difficultyModifier > 0)
             {
                 PlayerHealthController.instance.DamagePlayer(adjustedDamage);
+            }
+            else if (difficultyModifier < 0)
+            {
+                PlayerHealthController.instance.DamagePlayer((int)(damage / 1.35));
             }
             else
             {

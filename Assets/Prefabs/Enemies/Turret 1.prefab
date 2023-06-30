@@ -96,8 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf14581b0def68a4dab96f8370fb5892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 15
+  currentHealth: 12
   theEC: {fileID: 0}
+  adjustCriteria: {fileID: 0}
 --- !u!65 &2454976502835170319
 BoxCollider:
   m_ObjectHideFlags: 0

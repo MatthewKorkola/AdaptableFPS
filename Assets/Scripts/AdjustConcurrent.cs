@@ -27,7 +27,15 @@ public class AdjustConcurrent : MonoBehaviour
         // Adjust game settings based on the current difficulty value.
         // Adjusting maximum player health
         playerHealthController = FindObjectOfType<PlayerHealthController>();
-        playerHealthController.maxHealth = playerHealthController.maxHealth - ((difficultyModifier * 10) - (int)Math.Pow(difficultyModifier, 2));
+        if (difficultyModifier < 0)
+        {
+            playerHealthController.maxHealth = playerHealthController.maxHealth - ((difficultyModifier * 10) - (int)Math.Pow(difficultyModifier, 2));
+        }
+        else if (difficultyModifier > 0)
+        {
+            playerHealthController.maxHealth = playerHealthController.maxHealth - ((difficultyModifier * 5) + difficultyModifier);
+        }
+        
 
         if (playerHealthController.maxHealth < 40) playerHealthController.maxHealth = 40;
         if (playerHealthController.maxHealth > 999) playerHealthController.maxHealth = 999;
@@ -38,7 +46,14 @@ public class AdjustConcurrent : MonoBehaviour
         {
             foreach (HealthPickup healthPickup in healthPickups)
             {
-                healthPickup.healAmount = healthPickup.healAmount - difficultyModifier * 10;
+                if (difficultyModifier < 0)
+                {
+                    healthPickup.healAmount = healthPickup.healAmount - difficultyModifier * 10;
+                }
+                else if (difficultyModifier > 0)
+                {
+                    healthPickup.healAmount = healthPickup.healAmount - difficultyModifier * 4;
+                }
 
                 if (healthPickup.healAmount < 10) healthPickup.healAmount = 10;
                 if (healthPickup.healAmount > 999) healthPickup.healAmount = 999;
@@ -120,7 +135,14 @@ public class AdjustConcurrent : MonoBehaviour
         if (gun.currentAmmo > 999) gun.currentAmmo = 999;
 
         // Modify the pickupAmount of a gun based on the difficulty.
-        gun.pickupAmount = gun.pickupAmount - (int)(difficultyModifier * 0.5 * gun.pickupAmount);
+        if (difficultyModifier > 0)
+        {
+            gun.pickupAmount = gun.pickupAmount - (int)(difficultyModifier * 0.1 * gun.pickupAmount);
+        }
+        else if (difficultyModifier < 0)
+        {
+            gun.pickupAmount = gun.pickupAmount - (int)(difficultyModifier * 0.2 * gun.pickupAmount);
+        }
         if (gun.pickupAmount < 1) gun.pickupAmount = 1;
         if (gun.pickupAmount > 999) gun.pickupAmount = 999;
     }

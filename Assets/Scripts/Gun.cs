@@ -39,6 +39,11 @@ public class Gun : MonoBehaviour
     {
         currentAmmo += pickupAmount;
 
+        if (currentAmmo > 999)
+        {
+            currentAmmo = 999;
+        }
+
         UIController.instance.ammoText.text = "Ammo: " + currentAmmo;
     }
 }
